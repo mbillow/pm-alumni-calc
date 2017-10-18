@@ -58,7 +58,7 @@ for user in users:
                 cost += ((total_dsk - 50) / 50) * 10
 
             dues_table.append(
-                [ldap_user.cn, len(users[user]), total_cpu, total_mem, total_dsk, int(cost)]
+                [ldap_user.displayName, len(users[user]), total_cpu, total_mem, total_dsk, int(cost)]
             )
     except KeyError:
         if user == 'alumni':
@@ -74,7 +74,7 @@ for user in users:
                     cost += (vm['maxcpu'] - 2) * 10
                 if dsk >= 50:
                     cost += ((dsk - 50) / 50) * 10
-                dues_table.append([ldap_user.cn, "1", vm['maxcpu'], mem, dsk, int(cost)])
+                dues_table.append([ldap_user.displayName, "1", vm['maxcpu'], mem, dsk, int(cost)])
 
 table = AsciiTable(dues_table)
 print(table.table)
