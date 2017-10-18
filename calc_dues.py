@@ -1,6 +1,7 @@
 from terminaltables import AsciiTable
 from proxmoxer import ProxmoxAPI
 from csh_ldap import CSHLDAP
+from sys import stderr
 
 import secrets
 
@@ -56,6 +57,9 @@ for user in users:
                 cost += (total_cpu - 2) * 10
             if total_dsk >= 50:
                 cost += ((total_dsk - 50) / 50) * 10
+
+            stderr.write(ldap_user.cn +
+                " is not active, consider moving VMs to alumni pool!")
 
             dues_table.append(
                 [ldap_user.cn, len(users[user]), total_cpu, total_mem, total_dsk, int(cost)]
