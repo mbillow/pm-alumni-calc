@@ -81,6 +81,6 @@ for user in users:
 
 table = AsciiTable(dues_table)
 print(table.table)
-stderr.write("The following users are no longer active, please consider migrating their VMs to the alumni pool:\n")
+stderr.write("The following users are no longer active, please consider migrating their VMs to the alumni pool or seeing if they need them any more:\n")
 for user in inactive_users:
     stderr.write("  - " + user + "\n")
