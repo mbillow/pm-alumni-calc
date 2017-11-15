@@ -13,7 +13,7 @@ dues_table = [
 ]
 
 users = {}
-
+inactive_users = []
 
 def is_active(member):
     group_list = member.get("memberOf")
@@ -58,8 +58,7 @@ for user in users:
             if total_dsk >= 50:
                 cost += ((total_dsk - 50) / 50) * 10
 
-            stderr.write(ldap_user.cn +
-                " is not active, consider moving VMs to alumni pool!")
+            inactive_users.append(ldap_user.displayName)
 
             dues_table.append(
                 [ldap_user.displayName, len(users[user]), total_cpu, total_mem, total_dsk, int(cost)]
@@ -82,3 +81,6 @@ for user in users:
 
 table = AsciiTable(dues_table)
 print(table.table)
+stderr.write("The following users are no longer active, please consider migrating their VMs to the alumni pool:\n")
+for user in inactive_users:
+    stderr.write("  - " + user + "\n")
